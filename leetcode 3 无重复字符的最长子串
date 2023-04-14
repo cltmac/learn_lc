@@ -1,3 +1,4 @@
+#滑动窗口
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
@@ -5,16 +6,15 @@ class Solution(object):
         :rtype: int
         """
         left = right = 0
-        char_set = set()
-        max_len = 0
-        current_len = 0
+        char_set = set() #集合：非重复
+        max_len ，current_len = 0
         while (right < len(s)):
-            if s[right] not in char_set:
+            if s[right] not in char_set: #若无重复，右指针向右移动，更新长度
                 char_set.add(s[right])
                 right += 1
                 current_len = right - left
                 max_len = max(current_len,max_len)
-            else:
+            else:                        #遇到重复元素时，左指针向左移动，此时长度变短，无需进行更新
                 char_set.remove(s[left])
                 left += 1
         return max_len
