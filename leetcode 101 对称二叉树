@@ -1,0 +1,21 @@
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        return self.compare(root.left, root.right)
+
+    def compare(self, left, right):
+        if left != None and right == None: return False
+        elif left == None and right != None: return False
+        elif left == None and right == None: return True
+        elif left.val != right.val: return False #这个条件要放到最后判断，要不会出错，因为必须确认左右节点都是有值的
+        
+        #后序遍历
+        outside = self.compare(left.left, right.right)
+        inside = self.compare(left.right, right.left)
+        isSame = outside and inside
+        return isSame
